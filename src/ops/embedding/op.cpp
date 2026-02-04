@@ -39,6 +39,16 @@ void embedding(tensor_t out, tensor_t index, tensor_t weight) {
 
     llaisys::core::context().setDevice(out->deviceType(), out->deviceId());
     switch (out->deviceType()) {
+
+    case LLAISYS_DEVICE_CPU:
+        return cpu::embedding(
+            out->data(),
+            index->data(),
+            weight->data(),
+            out->dtype(),
+            num_tokens,
+            hidden_dim,
+            vocab_size);
 #ifdef ENABLE_NVIDIA_API
     case LLAISYS_DEVICE_NVIDIA:
         TO_BE_IMPLEMENTED();

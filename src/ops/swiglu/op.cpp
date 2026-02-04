@@ -33,7 +33,15 @@ void swiglu(tensor_t out, tensor_t gate, tensor_t up) {
     }
 
     llaisys::core::context().setDevice(out->deviceType(), out->deviceId());
-    switch (out->deviceType()) {
+    switch (outs->deviceType()) {
+    case LLAISYS_DEVICE_CPU:
+        return cpu::swiglu(
+            out->data(),
+            gate->data(),
+            up->data(),
+            rows * cols, // 视为打平的 1D 数组处理
+            out->dtype());
+
 #ifdef ENABLE_NVIDIA_API
     case LLAISYS_DEVICE_NVIDIA:
         TO_BE_IMPLEMENTED();

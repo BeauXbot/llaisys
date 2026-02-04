@@ -53,7 +53,15 @@ void self_attention(tensor_t attn_val, tensor_t q, tensor_t k, tensor_t v, float
 
     llaisys::core::context().setDevice(attn_val->deviceType(), attn_val->deviceId());
 
-    switch (attn_val->deviceType()) {
+    switch (attn_vals->deviceType()) {
+    case LLAISYS_DEVICE_CPU:
+        return cpu::self_attention(
+            attn_val->data(),
+            q->data(),
+            k->data(),
+            v->data(),
+            attn_val->dtype(),
+            seqlen, total_len, nhead, nkvhead, d, dv, scale);
 #ifdef ENABLE_NVIDIA_API
     case LLAISYS_DEVICE_NVIDIA:
         TO_BE_IMPLEMENTED();

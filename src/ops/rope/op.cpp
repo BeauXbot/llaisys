@@ -40,6 +40,16 @@ void rope(tensor_t out, tensor_t in, tensor_t pos_ids, float theta) {
 
     llaisys::core::context().setDevice(out->deviceType(), out->deviceId());
     switch (out->deviceType()) {
+    case LLAISYS_DEVICE_CPU:
+        return cpu::rope(
+            out->data(),
+            in->data(),
+            pos_ids->data(),
+            out->dtype(),
+            seqlen,
+            nhead,
+            head_dim,
+            theta);
 #ifdef ENABLE_NVIDIA_API
     case LLAISYS_DEVICE_NVIDIA:
         TO_BE_IMPLEMENTED();
