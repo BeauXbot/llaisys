@@ -33,7 +33,7 @@ void swiglu(tensor_t out, tensor_t gate, tensor_t up) {
     }
 
     llaisys::core::context().setDevice(out->deviceType(), out->deviceId());
-    switch (outs->deviceType()) {
+    switch (out->deviceType()) {
     case LLAISYS_DEVICE_CPU:
         return cpu::swiglu(
             out->data(),
