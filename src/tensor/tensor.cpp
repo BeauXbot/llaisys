@@ -253,7 +253,7 @@ tensor_t Tensor::view(const std::vector<size_t> &shape) const {
     std::vector<ptrdiff_t> new_strides(ndim_);
     for (size_t i = 1; i <= ndim_; ++i) {
         new_strides[ndim_ - i] = stride;
-        stride *= shape[ndim_ - 1];
+        stride *= shape[ndim_ - i];
     }
 
     // 构建新的TensorMeta
