@@ -53,7 +53,7 @@ void self_attention(tensor_t attn_val, tensor_t q, tensor_t k, tensor_t v, float
 
     llaisys::core::context().setDevice(attn_val->deviceType(), attn_val->deviceId());
 
-    switch (attn_vals->deviceType()) {
+    switch (attn_val->deviceType()) {
     case LLAISYS_DEVICE_CPU:
         return cpu::self_attention(
             attn_val->data(),
