@@ -167,8 +167,11 @@ void Tensor::debug() const {
 
 bool Tensor::isContiguous() const {
     size_t z = 1;
+    size_t n = this->ndim();
 
-    for (size_t i = this->ndim() - 1; i >= 0; --i) {
+    // 使用 k 递增循环，内部算出 i = n - 1 - k 来反向遍历
+    for (size_t k = 0; k < n; ++k) {
+        size_t i = n - 1 - k;
         size_t current_dim = this->shape()[i];
 
         if (current_dim == 0) {
