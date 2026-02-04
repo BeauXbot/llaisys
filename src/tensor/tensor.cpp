@@ -168,7 +168,7 @@ void Tensor::debug() const {
 bool Tensor::isContiguous() const {
     size_t z = 1;
 
-    for (int i = this->ndim() - 1; i >= 0; --i) {
+    for (size_t i = this->ndim() - 1; i >= 0; --i) {
         size_t current_dim = this->shape()[i];
 
         if (current_dim == 0) {
